@@ -1,0 +1,32 @@
+body {
+    background-color: black;
+    color: palevioletred;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0px; 
+}
+
+main {
+    color: palevioletred;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0px;
+    font-size: 16pt;
+}
+
+header {
+    background-color: white;
+    color: black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 10px;
+    font-size: 10pt;
+}
+
+footer {
+    background-color: white;
+    color: black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 10pt;
+}
+
+a {
+    text-decoration: none;
+}
