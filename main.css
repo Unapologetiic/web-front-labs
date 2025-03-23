@@ -29,11 +29,14 @@ footer {
 
 a {
     text-decoration: none;
+    transition: 1s 2s;
+    color: palevioletred;
+    font-size: 30px
 }
 
-a:link{
+a:link {
     color: palevioletred;
-    font-size: 30px;
+    font-size: 30px
 }
 
 a:visited{
@@ -44,6 +47,7 @@ a:hover {
     color: crimson;
     text-decoration: underline;
     background-color: whitesmoke;
+    transition: 0.3s;
 }
 
 a:active {
