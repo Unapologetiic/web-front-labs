@@ -30,3 +30,23 @@ footer {
 a {
     text-decoration: none;
 }
+
+a:link{
+    color: palevioletred;
+    font-size: 30px;
+}
+
+a:visited{
+    color: white;
+}
+
+a:hover {
+    color: crimson;
+    text-decoration: underline;
+    background-color: whitesmoke;
+}
+
+a:active {
+    color: black;
+    opacity: 0.3px;
+}
