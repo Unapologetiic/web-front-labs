@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кудеярова Яна Олеговна. Позиционирование</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <style>
+        div {
+            width: 300px;
+            height: 70px;
+            line-height: 70px;
+            background-color: white;
+            border: 4px dotted palevioletred;
+            margin: 15px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .position-relative{
+            position: relative;
+            left: 150px;
+            top: -140px;
+            z-index: 0;
+        }
+        .position-relative:hover{
+            z-index: 2;
+        }
+        .position-absolute {
+            position: absolute;
+            left: 300px;
+        }
+        .position-absolute:hover{
+            width: 400px;
+            height: 90px;
+            line-height: 100px;
+            background-color: blueviolet;
+            color: black;
+            border: 4px dotted white;
+            font-size: 40px;
+            text-shadow: 4px 3px 3px rgba(248, 204, 210, 0.649);
+        }
+    </style>
+</head>
+<body>
+    <header>
+
+    </header>
+
+    <main>
+        <div>static</div>
+        <div>static</div>
+        <div class="position-relative">relative</div>
+        <div>static</div>
+        <div>static</div>
+        <div class="position-absolute">absolute</div>
+        <div>static</div>
+        <div>static</div>
+        <div>static</div>
+        <div>static</div>
+    </main>
+
+    <footer>
+
+    </footer>
+    
+</body>
+</html>
