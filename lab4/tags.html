@@ -10,12 +10,11 @@
     <link rel="icon" href="../favicon-32x32.png">
     <link rel="icon" href="../favicon-16x16.png">
     <style>
-        .main {
+        main {
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        
         
         .tag-cloud {
             position: relative;
@@ -23,125 +22,276 @@
             height: 600px;
             margin: 50px;
         }
-        
+
         .tag {
             font-size: 40px;
             position: absolute;
             cursor: pointer;
             transition: all 0.2s;
             z-index: 1;
+            animation-play-state: running;
         }
         
         .tag:hover {
             transform: scale(4); 
             z-index: 2;
             text-shadow: 0 0 5px rgba(255, 255, 255, 0.24);
+            animation-play-state: paused;
         }
         
+        @keyframes float1 {
+            0% { top: 18%; left: 12%; }
+            25% { top: 30%; left: 15%; }
+            50% { top: 10%; left: 25%; }
+            75% { top: 25%; left: 10%; }
+            100% { top: 18%; left: 12%; }
+        }
+
         .tag-1 {
             top: 18%;
             left: 12%;
             color: red;
             font-size: 24px;
             transform: rotate(-5deg);
+            animation: float1 20s linear infinite;
         }
+
+        @keyframes float2 {
+            0% { top: 15%; right: 10%; }
+            25% { top: 17%; right: 12%; }
+            50% { top: 20%; right: 15%; }
+            75% { top: 12%; right: 12%; }
+            100% { top: 15%; right: 10%; }
+        }
+
         .tag-2 {
             color: pink;
             font-size: 15px;
             transform: rotate(3deg);
             top: 15%;
             right: 10%;
+            animation: float2 10s linear infinite;
         }
+
+        @keyframes float3 {
+            0% { top: 30%; left: 20%; }
+            25% { top: 25%; left: 15%; }
+            50% { top: 20%; left: 25%; }
+            75% { top: 25%; left: 10%; }
+            100% { top: 30%; left: 20%; }
+        }
+
         .tag-3 {
             color: green;
             font-size: 34px;
             transform: rotate(-2deg);
             top: 30%;
             left: 20%;
+            animation: float3 10s linear infinite;
         }
+
+        @keyframes float4 {
+            0% { bottom: 25%; right: 15%; }
+            25% { bottom: 17%; right: 12%; }
+            50% { bottom: 20%; right: 15%; }
+            75% { bottom: 12%; right: 12%; }
+            100% { bottom: 25%; right: 15%; }
+        }
+
         .tag-4 {
             color: orange;
             font-size: 26px;
             transform: rotate(7deg);
             bottom: 25%;
             right: 15%;
+            animation: float4 12s linear infinite;
         }
+
+        @keyframes float5 {
+            0% { top: 40%; right: 25%; }
+            25% { top: 33%; right: 30%; }
+            50% { top: 30%; right: 40%; }
+            75% { top: 34%; right: 30%; }
+            100% { top: 40%; right: 25%; }
+        }
+
         .tag-5 {
             color: plum;
             font-size: 60px;
             transform: rotate(-8deg);
             top: 40%;
             right: 25%;
+            animation: float5 15s linear infinite;
         }
+
+        @keyframes float6 {
+            0% { bottom: 15%; left: 10%; }
+            25% { bottom: 30%; left: 12%; }
+            50% { bottom: 20%; left: 15%; }
+            75% { bottom: 12%; left: 20%; }
+            100% { bottom: 15%; left: 10%; }
+        }
+
         .tag-6 {
             color: blueviolet;
             font-size: 40px;
             transform: rotate(5deg);
             bottom: 15%;
             left: 10%;
+            animation: float6 10s linear infinite;
         }
+
+        @keyframes float7 {
+            0% { top: 60%; left: 30%; }
+            25% { top: 40%; left: 15%; }
+            50% { top: 30%; left: 25%; }
+            75% { top: 40%; left: 25%; }
+            100% { top: 60%; left: 30%; }
+        }
+
         .tag-7 {
             color: purple;
             font-size: 28px;
             transform: rotate(-3deg);
             top: 60%;
             left: 30%;
+            animation: float7 15s linear infinite;
         }
+
+        @keyframes float8 {
+            0% { top: 20%; left: 50%; }
+            25% { top: 32%; left: 15%; }
+            50% { top: 30%; left: 25%; }
+            75% { top: 27%; left: 40%; }
+            100% { top: 20%; left: 50%; }
+        }
+
         .tag-8 {
             color: gold;
             font-size: 56px;
             transform: rotate(4deg);
             top: 20%;
             left: 50%;
+            animation: float8 11s linear infinite;
         }
+
+        @keyframes float9 {
+            0% { bottom: 30%; right: 30%; }
+            25% { bottom: 17%; right: 20%; }
+            50% { bottom: 25%; right: 15%; }
+            75% { bottom: 12%; right: 25%; }
+            100% { bottom: 30%; right: 30%; }
+        }
+
         .tag-9 {
             color: rebeccapurple;
             font-size: 44px;
             transform: rotate(-6deg);
             bottom: 30%;
             right: 30%;
+            animation: float9 9s linear infinite;
         }
+
+        @keyframes float10 {
+            0% { top: 70%; left: 30%; }
+            25% { top: 65%; left: 15%; }
+            50% { top: 50%; left: 25%; }
+            75% { top: 60%; left: 40%; }
+            100% { top: 70%; left: 30%; }
+        }
+
         .tag-10 {
             color: olive;
             font-size: 66px;
             transform: rotate(2deg);
             top: 70%;
             left: 30%;
+            animation: float10 14s linear infinite
         }
+
+        @keyframes float11 {
+            0% { bottom: 40%; left: 40%; }
+            25% { bottom: 45%; left: 35%; }
+            50% { bottom: 40%; left: 20%; }
+            75% { bottom: 50%; left: 30%; }
+            100% { bottom: 40%; left: 40%; }
+        }
+
         .tag-11 {
             color: orchid;
             font-size: 34px;
             transform: rotate(-4deg);
             bottom: 40%;
             left: 40%;
+            animation: float11 14s linear infinite
         }
+
+        @keyframes float12 {
+            0% { top: 50%; left: 5%; }
+            25% { top: 60%; left: 10%; }
+            50% { top: 55%; left: 20%; }
+            75% { top: 62%; left: 15%; }
+            100% { top: 50%; left: 5%; }
+        }
+
         .tag-12 {
             color: paleturquoise;
             font-size: 23px;
             transform: rotate(6deg);
             top: 50%;
             left: 5%;
+            animation: float12 7s linear infinite
         }
+
+        @keyframes float13 {
+            0% { bottom: 10%; right: 40%; }
+            25% { bottom: 17%; right: 36%; }
+            50% { bottom: 25%; right: 30%; }
+            75% { bottom: 12%; right: 37%; }
+            100% { bottom: 10%; right: 40%; }
+        }
+
         .tag-13 {
             color: hotpink;
             font-size: 36px;
             transform: rotate(-1deg);
             bottom: 10%;
             right: 40%;
+            animation: float13 10s linear infinite
         }
+
+        @keyframes float14 {
+            0% { top: 30%; right: 15%; }
+            25% { top: 33%; right: 30%; }
+            50% { top: 40%; right: 20%; }
+            75% { top: 43%; right: 30%; }
+            100% { top: 30%; right: 15%; }
+        }
+
         .tag-14 {
             color: sandybrown;
             font-size: 35px;
             transform: rotate(8deg);
             top: 30%;
             right: 15%;
+            animation: float14 14s linear infinite
         }
+
+        @keyframes float15 {
+            0% { top: 15%; left: 60%; }
+            25% { top: 20%; left: 67%; }
+            50% { top: 19%; left: 58%; }
+            75% { top: 25%; left: 65%; }
+            100% { top: 15%; left: 60%; }
+        }
+
         .tag-15 {
             color: skyblue;
             font-size: 33px;
             transform: rotate(-7deg);
             top: 15%;
             left: 60%;
+            animation: float15 7s linear infinite
         }
     </style> 
         
@@ -153,7 +303,7 @@
     </header>
 
     <main>
-        <div>
+        <div class = "tag-cloud">
             <span class="tag tag-1">position</span>
             <span class="tag tag-2">relative</span>
             <span class="tag tag-3">absolute</span>
