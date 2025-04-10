@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кудеярова Яна Олеговна. Облако тегов</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <style>
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        
+        .tag-cloud {
+            position: relative;
+            width: 80%;
+            height: 600px;
+            margin: 50px;
+        }
+        
+        .tag {
+            font-size: 40px;
+            position: absolute;
+            cursor: pointer;
+            transition: all 0.2s;
+            z-index: 1;
+        }
+        
+        .tag:hover {
+            transform: scale(4); 
+            z-index: 2;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.24);
+        }
+        
+        .tag-1 {
+            top: 18%;
+            left: 12%;
+            color: red;
+            font-size: 24px;
+            transform: rotate(-5deg);
+        }
+        .tag-2 {
+            color: pink;
+            font-size: 15px;
+            transform: rotate(3deg);
+            top: 15%;
+            right: 10%;
+        }
+        .tag-3 {
+            color: green;
+            font-size: 34px;
+            transform: rotate(-2deg);
+            top: 30%;
+            left: 20%;
+        }
+        .tag-4 {
+            color: orange;
+            font-size: 26px;
+            transform: rotate(7deg);
+            bottom: 25%;
+            right: 15%;
+        }
+        .tag-5 {
+            color: plum;
+            font-size: 60px;
+            transform: rotate(-8deg);
+            top: 40%;
+            right: 25%;
+        }
+        .tag-6 {
+            color: blueviolet;
+            font-size: 40px;
+            transform: rotate(5deg);
+            bottom: 15%;
+            left: 10%;
+        }
+        .tag-7 {
+            color: purple;
+            font-size: 28px;
+            transform: rotate(-3deg);
+            top: 60%;
+            left: 30%;
+        }
+        .tag-8 {
+            color: gold;
+            font-size: 56px;
+            transform: rotate(4deg);
+            top: 20%;
+            left: 50%;
+        }
+        .tag-9 {
+            color: rebeccapurple;
+            font-size: 44px;
+            transform: rotate(-6deg);
+            bottom: 30%;
+            right: 30%;
+        }
+        .tag-10 {
+            color: olive;
+            font-size: 66px;
+            transform: rotate(2deg);
+            top: 70%;
+            left: 30%;
+        }
+        .tag-11 {
+            color: orchid;
+            font-size: 34px;
+            transform: rotate(-4deg);
+            bottom: 40%;
+            left: 40%;
+        }
+        .tag-12 {
+            color: paleturquoise;
+            font-size: 23px;
+            transform: rotate(6deg);
+            top: 50%;
+            left: 5%;
+        }
+        .tag-13 {
+            color: hotpink;
+            font-size: 36px;
+            transform: rotate(-1deg);
+            bottom: 10%;
+            right: 40%;
+        }
+        .tag-14 {
+            color: sandybrown;
+            font-size: 35px;
+            transform: rotate(8deg);
+            top: 30%;
+            right: 15%;
+        }
+        .tag-15 {
+            color: skyblue;
+            font-size: 33px;
+            transform: rotate(-7deg);
+            top: 15%;
+            left: 60%;
+        }
+    </style> 
+        
+</head>
+<body>
+    
+    <header>
+        НГТУ, ФБ, Лабораторная работа 4
+    </header>
+
+    <main>
+        <div>
+            <span class="tag tag-1">position</span>
+            <span class="tag tag-2">relative</span>
+            <span class="tag tag-3">absolute</span>
+            <span class="tag tag-4">fixed</span>
+            <span class="tag tag-5">sticky</span>
+            <span class="tag tag-6">static</span>
+            <span class="tag tag-7">z-index</span>
+            <span class="tag tag-8">top</span>
+            <span class="tag tag-9">right</span>
+            <span class="tag tag-10">bottom</span>
+            <span class="tag tag-11">left</span>
+            <span class="tag tag-12">float</span>
+            <span class="tag tag-13">clear</span>
+            <span class="tag tag-14">display</span>
+            <span class="tag tag-15">flexbox</span>
+        </div>
+    </main>
+
+    <footer>
+        &copy; Яна Кудеярова, ФБИ-31, 2 курс, 2025
+    </footer>
+
+</body>
+</html>
