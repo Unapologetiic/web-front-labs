@@ -16,6 +16,25 @@
 
             let a = parseInt(inputA.value);
             let b = parseInt(inputB.value);
+
+            if(isNaN(a)) {
+                alert('Введите числовое значение в первое поле');
+                inputA.focus();
+                inputA.select();
+                inputA.style.color = 'red';
+                inputA.style.borderColor = 'red';
+                return;
+            }
+
+            if(isNaN(b)) {
+                alert('Введите числовое значение во второе поле');
+                inputB.focus();
+                inputB.select();
+                inputB.style.color = 'red';
+                inputB.style.borderColor = 'red';
+                return;
+            }
+            
             let result = a + b;
             alert("Сумма " + a + " и " + b + " равна " + result)
         }
@@ -26,6 +45,25 @@
 
             let a = parseInt(inputA.value);
             let b = parseInt(inputB.value);
+
+            if(isNaN(a)) {
+                alert('Введите числовое значение в первое поле');
+                inputA.focus();
+                inputA.select();
+                inputA.style.color = 'red';
+                inputA.style.borderColor = 'red';
+                return;
+            }
+
+            if(isNaN(b)) {
+                alert('Введите числовое значение во второе поле');
+                inputB.focus();
+                inputB.select();
+                inputB.style.color = 'red';
+                inputB.style.borderColor = 'red';
+                return;
+            }
+
             let result = a - b;
             alert("Разность " + a + " и " + b + " равна " + result)
         }
@@ -36,8 +74,67 @@
 
             let a = parseInt(inputA.value);
             let b = parseInt(inputB.value);
+
+            if(isNaN(a)) {
+                alert('Введите числовое значение в первое поле');
+                inputA.focus();
+                inputA.select();
+                inputA.style.color = 'red';
+                inputA.style.borderColor = 'red';
+                return;
+            }
+
+            if(isNaN(b)) {
+                alert('Введите числовое значение во второе поле');
+                inputB.focus();
+                inputB.select();
+                inputB.style.color = 'red';
+                inputB.style.borderColor = 'red';
+                return;
+            }
+
             let result = a * b;
             alert("Произведение " + a + " и " + b + " равна " + result)
+        }
+
+        function showDiv(){
+            let inputA = document.getElementById('numberA');
+            let inputB = document.getElementById('numberB');
+
+            let a = parseInt(inputA.value);
+            let b = parseInt(inputB.value);
+
+            if(b == 0) {
+                alert('На ноль делить нельзя!');
+                inputB.focus();
+                inputB.select();
+                inputB.style.color = 'red';
+                inputB.style.borderColor = 'red';
+                return;
+            }
+
+            if(isNaN(a)) {
+                alert('Введите числовое значение в первое поле');
+                inputA.focus();
+                inputA.select();
+                inputA.style.color = 'red';
+                inputA.style.borderColor = 'red';
+                return;
+            }
+
+            if(isNaN(b)) {
+                alert('Введите числовое значение во второе поле');
+                inputB.focus();
+                inputB.select();
+                inputB.style.color = 'red';
+                inputB.style.borderColor = 'red';
+                return;
+            }
+
+            inputB.style.color = '';
+            inputB.style.borderColor = '';
+            let result = a/b;
+            alert(a + " / " + b + " = " + result)
         }
 
         function showAuthor(){
@@ -86,6 +183,8 @@
         <div class="message" onclick="showDiff()">Найти разность чисел</div>
 
         <div class="message" onclick="showCom()">Найти произведение чисел</div>
+
+        <div class="message" onclick="showDiv()">Найти отношения чисел</div>
 
         <div class="message" onclick="showAuthor()">Узнать, кто автор страницы</div>    
     </main>
