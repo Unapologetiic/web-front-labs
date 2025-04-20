@@ -34,7 +34,7 @@
                 inputB.style.borderColor = 'red';
                 return;
             }
-            
+
             let result = a + b;
             alert("Сумма " + a + " и " + b + " равна " + result)
         }
@@ -137,6 +137,43 @@
             alert(a + " / " + b + " = " + result)
         }
 
+        function showCon(){
+            let inputA = document.getElementById('numberA');
+            let inputB = document.getElementById('numberB');
+
+            let a = parseInt(inputA.value);
+            let b = parseInt(inputB.value);
+
+            if (isNaN(a) || isNaN(b)) {
+                alert('Ошибка: одно из полей содержит нечисловое значение (NaN)');
+                inputA.focus();
+                inputA.select();
+                inputA.style.color = 'red';
+                inputA.style.borderColor = 'red';
+                inputB.focus();
+                inputB.select();
+                inputB.style.color = 'red';
+                inputB.style.borderColor = 'red';
+                return;
+            }
+            
+            if (a === 0 && b === 0){
+                alert('Ошибка: оба поля равны нулю');
+                inputA.focus();
+                inputA.select();
+                inputA.style.color = 'red';
+                inputA.style.borderColor = 'red';
+                inputB.focus();
+                inputB.select();
+                inputB.style.color = 'red';
+                inputB.style.borderColor = 'red';
+                return;
+            }
+            
+            let result = a ** b;
+            alert(a + " в степени " + b + " = " + result)
+        }
+
         function showAuthor(){
             let author = "Автор страницы: \nКудеярова Яна Олеговна"
             alert(author)
@@ -185,6 +222,8 @@
         <div class="message" onclick="showCom()">Найти произведение чисел</div>
 
         <div class="message" onclick="showDiv()">Найти отношения чисел</div>
+
+        <div class="message" onclick="showCon()">Возвести числа в степень</div>
 
         <div class="message" onclick="showAuthor()">Узнать, кто автор страницы</div>    
     </main>
