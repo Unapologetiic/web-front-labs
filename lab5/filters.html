@@ -4,42 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Кудеярова Яна Олеговна. Вывод суммы</title>
+    <title>Кудеярова Яна Олеговна. Фильтры</title>
     <link rel="stylesheet" href="../main.css">
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
     <link rel="icon" href="../favicon-32x32.png">
     <link rel="icon" href="../favicon-16x16.png">
     <script>
-        const range = document.getElementById('blurRange');
-        const valueDisplay = document.getElementById('blurValue');
-        const image = document.getElementById('imageToFilter');
-
-        range.addEventListener('input', function() {
-            const blurAmount = this.value + 'px';
-            valueDisplay.textContent = this.value;
-            image.style.filter = 'blur(' + blurAmount + ')';
-        });
+        function blurImage() {
+            let value = document.getElementById('blurValue').value + 'px';
+            document.getElementById('blurOutput').innerText = value;
+            document.getElementById('blurImage').style.filter = 'blur(' + value + ')';
+        }
     </script>
     <style>
-        main {
-            padding: 20px;
-            text-align: center;
-        }
-        .filter-section {
-            margin-bottom: 30px;
-        }
-        .filter-section img {
-            max-width: 400px;
-            transition: all 0.3s ease;
-        }
-        .filter-section label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-        input[type="range"] {
-            width: 300px;
-        }
+        
     </style>
 </head>
 <body>
@@ -48,14 +26,12 @@
     </header>
 
     <main>
-        <h1>Фильтры</h1>
-
-        <div class="filter-section">
-            <label for="blurRange">Размытие: <span id="blurValue">0</span>px</label>
-            <input type="range" id="blurRange" min="0" max="20" value="0">
-            <br><br>
-            <img src="zadanie.jpg" id="imageToFilter" alt="Фото для фильтрации">
+        <div>
+            Фильтр blur:
+            <input type="range" min="0", max="20" value="0" onchange="blurImage()" id="blurValue">
+            <span id="blurOutput"></span>
         </div>
+        <div><img src="пейзаж.jpg" id="blurImage"></div>
     </main>
 
     <footer>
