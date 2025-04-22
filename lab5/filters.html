@@ -35,6 +35,11 @@
             document.getElementById('hueRotateOutput').innerText = value;
             document.getElementById('blurImage').style.filter = 'hue-rotate(' + value + ')';
         }
+        function invertImage() {
+            let value = document.getElementById('invertValue').value + '%';
+            document.getElementById('invertOutput').innerText = value;
+            document.getElementById('blurImage').style.filter = 'invert(' + value + ')';
+        }
     </script>
 </head>
 <body>
@@ -71,6 +76,12 @@
             Фильтр hue-rotate:
             <input type="range" min="0" max="360" value="0" onchange="hueRotateImage()" id="hueRotateValue">
             <span id="hueRotateOutput">0deg</span>
+        </div>
+
+        <div>
+            Фильтр invert:
+            <input type="range" min="0" max="100" value="0" onchange="invertImage()" id="invertValue">
+            <span id="invertOutput">0%</span>
         </div>
 
         <div><img src="пейзаж.jpg" id="blurImage"></div>
