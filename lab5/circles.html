@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кудеярова Яна Олеговна. Круги</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <script>
+        const colors = [
+            '#FF5733', '#33FF57', '#3357FF', '#F033FF', 
+            '#FF33A8', '#33FFF5', '#8F33FF', '#FFC733', 
+            '#33FFBD', '#FF5733'
+        ];
+        
+        // Ждем загрузки DOM
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('circles-container');
+            
+            // Создаем 10 кругов
+            for (let i = 1; i <= 10; i++) {
+                const circle = document.createElement('div');
+                circle.className = 'circle';
+                circle.textContent = i;
+                circle.style.backgroundColor = colors[i-1];
+                
+                // Случайное позиционирование
+                const maxX = window.innerWidth - 80;
+                const maxY = window.innerHeight - 160; // Учитываем header и footer
+                circle.style.left = Math.random() * maxX + 'px';
+                circle.style.top = (Math.random() * maxY + 60) + 'px'; // Учитываем header
+                
+                // Обработчик клика
+                circle.addEventListener('click', function() {
+                    this.classList.add('hidden');
+                });
+                
+                container.appendChild(circle);
+            }
+            
+            // Кнопка восстановления
+            document.getElementById('reset-btn').addEventListener('click', function() {
+                const circles = document.querySelectorAll('.circle');
+                circles.forEach(circle => {
+                    circle.classList.remove('hidden');
+                });
+            });
+        });
+    </script>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        main {
+            width: 100%;
+            min-height: calc(100vh - 120px); /* Учитываем высоту header и footer */
+            position: relative;
+        }
+        
+        .circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            position: absolute;
+            transition: all 0.6s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hidden {
+            width: 0;
+            height: 0;
+            opacity: 0;
+            font-size: 0;
+        }
+        
+        #reset-btn {
+            position: fixed;
+            bottom: 60px; /* Учитываем высоту footer */
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 100;
+        }
+        
+        #reset-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 5
+    </header>
+
+    <main id="circles-container">
+        <button id="reset-btn">Восстановить круги</button>
+    </main>
+     
+            
+    <footer>
+        &copy; Яна Кудеярова, ФБИ-31, 2 курс, 2025
+    </footer>
+
+    
+</body>
+</html>
