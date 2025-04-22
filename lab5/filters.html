@@ -25,6 +25,11 @@
             document.getElementById('contrastOutput').innerText = value;
             document.getElementById('blurImage').style.filter = 'contrast(' + value + ')';
         }
+        function grayscaleImage() {
+            let value = document.getElementById('grayscaleValue').value + '%';
+            document.getElementById('grayscaleOutput').innerText = value;
+            document.getElementById('blurImage').style.filter = 'grayscale(' + value + ')';
+        }
     </script>
 </head>
 <body>
@@ -51,7 +56,12 @@
             <span id="contrastOutput">100%</span>
         </div>
 
-
+        <div>
+            Фильтр grayscale:
+            <input type="range" min="0" max="100" value="0" onchange="grayscaleImage()" id="grayscaleValue">
+            <span id="grayscaleOutput">0%</span>
+        </div>
+        
         <div><img src="пейзаж.jpg" id="blurImage"></div>
         
     </main>
