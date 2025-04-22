@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кудеярова Яна Олеговна. Корзина товаров</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <script>
+        function calculateTotal() {
+            let total = 0;
+            const prices = [100, 80, 150, 300, 60];
+            const inputs = document.getElementsByClassName('tovar-input');
+            
+            for (let i = 0; i < inputs.length; i++) {
+                total += (inputs[i].value || 0) * prices[i];
+            }
+            
+            document.getElementById('total').innerHTML = 'Общая сумма: ' + total + ' ₽';
+            document.getElementById('total').style.display = 'block';
+        }
+    
+        function clearCart() {
+            const inputs = document.getElementsByClassName('tovar-input');
+            for (let i = 0; i < inputs.length; i++) {
+                inputs[i].value = '';
+            }
+            document.getElementById('total').style.display = 'none';
+        }
+    </script>
+    <style>
+        .korzina {
+            display: inline-block;
+            border: 2px solid palevioletred;
+            border-radius: 5px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .tovar {
+            margin: 15px 0;
+        }
+        input[type="number"] {
+            width: 150px;
+            padding: 5px;
+            margin-left: 10px;
+        }
+        input[type="button"] {
+            padding: 8px 15px;
+            margin: 10px 5px 0 0;
+            background-color: palevioletred;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        input[type="button"]:hover {
+            background-color: palevioletred;
+        }
+        #total {
+            font-weight: bold;
+            margin-top: 15px;
+            color: palevioletred;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 5
+    </header>
+
+    <main>
+        <div class="korzina">
+            <h3>Корзина товаров</h3>
+            <div class="tovar">
+                <label>Яблоки (100р/шт):<input type="number" min="0" placeholder="Укажите количество"></label>
+            </div>
+
+            <div class="tovar">
+                <label>Груши (80р/шт):<input type="number" min="0" placeholder="Укажите количество"></label>
+            </div>
+
+            <div class="tovar">
+                <label>Апельсины (150р/шт):<input type="number" min="0" placeholder="Укажите количество"></label>
+            </div>
+
+            <div class="tovar">
+                <label>Дыни (300р/шт):<input type="number" min="0" placeholder="Укажите количество"></label>
+            </div>
+
+            <div class="tovar">
+                <label>Бананы (60р/шт):<input type="number" min="0" placeholder="Укажите количеств"></label>
+            </div>
+
+            <input type="button" value="Рассчитать" onclick="calculateTotal()">
+            <input type="button" value="Очистить" onclick="clearCart()">
+
+            <div id="total"></div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; Яна Кудеярова, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
