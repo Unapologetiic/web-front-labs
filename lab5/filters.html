@@ -20,6 +20,11 @@
             document.getElementById('brightnessOutput').innerText = value;
             document.getElementById('blurImage').style.filter = 'brightness(' + value + ')';
         }
+        function contrastImage() {
+            let value = document.getElementById('contrastValue').value + '%';
+            document.getElementById('contrastOutput').innerText = value;
+            document.getElementById('blurImage').style.filter = 'contrast(' + value + ')';
+        }
     </script>
 </head>
 <body>
@@ -39,6 +44,13 @@
             <input type="range" min="0" max="500" value="100" onchange="brightnessImage()" id="brightnessValue">
             <span id="brightnessOutput">100%</span>
         </div>
+
+        <div>
+            Фильтр contrast:
+            <input type="range" min="0" max="500" value="100" onchange="contrastImage()" id="contrastValue">
+            <span id="contrastOutput">100%</span>
+        </div>
+
 
         <div><img src="пейзаж.jpg" id="blurImage"></div>
         
