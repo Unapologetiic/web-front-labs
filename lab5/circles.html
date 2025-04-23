@@ -10,99 +10,72 @@
     <link rel="icon" href="../favicon-32x32.png">
     <link rel="icon" href="../favicon-16x16.png">
     <script>
-        const colors = [
-            '#FF5733', '#33FF57', '#3357FF', '#F033FF', 
-            '#FF33A8', '#33FFF5', '#8F33FF', '#FFC733', 
-            '#33FFBD', '#FF5733'
-        ];
-        
-        // Ждем загрузки DOM
-        document.addEventListener('DOMContentLoaded', function() {
-            const container = document.getElementById('circles-container');
-            
-            // Создаем 10 кругов
-            for (let i = 1; i <= 10; i++) {
-                const circle = document.createElement('div');
-                circle.className = 'circle';
-                circle.textContent = i;
-                circle.style.backgroundColor = colors[i-1];
-                
-                // Случайное позиционирование
-                const maxX = window.innerWidth - 80;
-                const maxY = window.innerHeight - 160; // Учитываем header и footer
-                circle.style.left = Math.random() * maxX + 'px';
-                circle.style.top = (Math.random() * maxY + 60) + 'px'; // Учитываем header
-                
-                // Обработчик клика
-                circle.addEventListener('click', function() {
-                    this.classList.add('hidden');
-                });
-                
-                container.appendChild(circle);
-            }
-            
-            // Кнопка восстановления
-            document.getElementById('reset-btn').addEventListener('click', function() {
-                const circles = document.querySelectorAll('.circle');
-                circles.forEach(circle => {
-                    circle.classList.remove('hidden');
-                });
+        function createCircle(event) {
+            event.target.style.transform = 'scale(0)';
+            event.target.style.opacity = '0';
+        }
+
+        function reset() {
+            document.querySelectorAll('.circle').forEach(circle => {
+                circle.style.transform = 'scale(1)';
+                circle.style.opacity = '1';
             });
-        });
+        }
+
+        function positionCircle() {
+            return Math.floor(Math.random() * 420) + 'px';
+        }
+
+        window.onload = function() {
+            document.querySelectorAll('.circle').forEach(circle => {
+                circle.style.top = positionCircle();
+                circle.style.left = positionCircle();
+            });
+        };
     </script>
     <style>
-        body {
-            margin: 0;
-            min-height: 100vh;
-            position: relative;
-        }
-        
         main {
-            width: 100%;
-            min-height: calc(100vh - 120px); /* Учитываем высоту header и footer */
-            position: relative;
+            display: flex; 
+            flex-direction: column;
+            align-items: center;
         }
-        
+
+        .container {
+            width: 500px;
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
         .circle {
-            width: 80px;
-            height: 80px;
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
             display: flex;
+            color: white;
             justify-content: center;
             align-items: center;
             font-size: 24px;
             font-weight: bold;
-            color: white;
             cursor: pointer;
             position: absolute;
-            transition: all 0.6s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            top: 0;
+            left: 0;
+            transform: translate(0, 0);
+            transition: transform 0.6s, opacity 0.6s;
+            border: 1px solid rgba(124, 103, 103, 0.767);
         }
-        
-        .hidden {
-            width: 0;
-            height: 0;
-            opacity: 0;
-            font-size: 0;
-        }
-        
-        #reset-btn {
-            position: fixed;
-            bottom: 60px; /* Учитываем высоту footer */
-            left: 50%;
-            transform: translateX(-50%);
+
+        button {
             padding: 10px 20px;
-            font-size: 16px;
-            background-color: #4CAF50;
+            background-color: #bb0977;
             color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            z-index: 100;
-        }
-        
-        #reset-btn:hover {
-            background-color: #45a049;
         }
     </style>
 </head>
@@ -111,8 +84,20 @@
         НГТУ, ФБ, Лабораторная работа 5
     </header>
 
-    <main id="circles-container">
-        <button id="reset-btn">Восстановить круги</button>
+    <main>
+        <button onclick="reset()">Вернуть все круги</button>
+        <div class="container">
+            <div class="circle" style="background-color: #800080;" onclick="createCircle(event)">1</div>
+            <div class="circle" style="background-color: #FF00FF;" onclick="createCircle(event)">2</div>
+            <div class="circle" style="background-color: #0000FF;" onclick="createCircle(event)">3</div>
+            <div class="circle" style="background-color: #008080;" onclick="createCircle(event)">4</div>
+            <div class="circle" style="background-color: #00FFFF;" onclick="createCircle(event)">5</div>
+            <div class="circle" style="background-color: #00FF00;" onclick="createCircle(event)">6</div>
+            <div class="circle" style="background-color: #FFFF00;" onclick="createCircle(event)">7</div>
+            <div class="circle" style="background-color: #9FE2BF;" onclick="createCircle(event)">8</div>
+            <div class="circle" style="background-color: #6495ED;" onclick="createCircle(event)">9</div>
+            <div class="circle" style="background-color: #CCCCFF;" onclick="createCircle(event)">10</div>
+        </div>
     </main>
      
             
