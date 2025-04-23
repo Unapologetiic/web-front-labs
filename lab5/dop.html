@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кудеярова Яна Олеговна. Дополнительное</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <script>
+        function filterImage(event) {
+            let img = document.getElementById('myImage');
+            let info = document.getElementById('info');
+
+            let rect = img.getBoundingClientRect();
+            let x = event.clientX - rect.left;
+            let width = rect.width;
+
+            let ratio = x / width;
+            if (ratio < 0) ratio = 0;
+            if (ratio > 1) ratio = 1;
+
+            let blur = (ratio * 10).toFixed(2);
+            let grayscale = event.ctrlKey ? ratio.toFixed(2) : 0;
+            let hue = event.altKey ? Math.floor(ratio * 360) : 0;
+            let brightness = event.shiftKey ? (0.5 + ratio * 1.5).toFixed(2) : 1;
+
+            img.style.filter = 
+                'blur(' + blur + 'px) ' +
+                'grayscale(' + grayscale + ') ' +
+                'hue-rotate(' + hue + 'deg) ' +
+                'brightness(' + brightness + ')';
+
+            info.innerHTML = 
+                'blur: ' + blur + 'px<br>' +
+                'grayscale(ctrl): ' + grayscale + '<br>' +
+                'hue-rotate(alt): ' + hue + 'deg<br>' +
+                'brightness(shift): ' + brightness;
+        }
+
+        function clearFilter() {
+            let img = document.getElementById('myImage');
+            let info = document.getElementById('info');
+            img.style.filter = 'none';
+            info.innerHTML = 'Фильтр: none';
+            }
+    </script>
+    <style>
+         #myImage {
+            width: 800px;
+            transition: filter 0.1s;
+        }
+        #info {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        НГТУ, ФБ, Лабораторная работа 5
+    </header>
+
+    <main>
+        <h2>Наведи мышь на картинку</h2>
+        <h4>Слева - минимальная степень</h4>
+        <h4>Справа - максимальная степень</h4>
+        <div id="info">Фильтр: none</div>
+        <img id="myImage" src="пейзаж.jpg" onmousemove="filterImage(event)" onmouseleave="clearFilter()">
+    </main>
+
+    <footer>
+        &copy; Яна Кудеярова, ФБИ-31, 2 курс, 2025
+    </footer>
+
+</body>
+</html>
