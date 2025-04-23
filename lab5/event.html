@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кудеярова Яна Олеговна. Объект событие</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <script>
+        function showCoords() {
+            let x = this.event.x;
+            let y = this.event.y;
+            let div = document.getElementById('block');
+
+            if(this.event.ctrlKey)
+                div.style.color = 'red';
+            else
+                div.style.color = 'black';
+
+            if(this.event.altKey)
+                div.style.backgroundColor = '#CCCCFF';
+            else
+                div.style.backgroundColor = 'white';
+
+            if (this.event.shiftKey) 
+                div.style.borderRadius = '50px';
+            else
+                div.style.borderRadius = '5px';
+            
+            div.innerHTML = '<b>x</b> =' + x + 'px<br><b>y</b> = ' + y + 'px';
+        }
+    </script>
+    <style>
+        #block {
+            width: 300px;
+            height: 300px;
+            border: 2px solid palevioletred;
+            border-radius: 5px;
+            color: black;
+            background-color: white;
+            cursor: crosshair;
+            padding: 10px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        НГТУ, ФБ, Лабораторная работа 5
+    </header>
+
+    <main>
+        <div id="block" onmousemove="showCoords()"></div> 
+    </main>
+
+    <footer>
+        &copy; Яна Кудеярова, ФБИ-31, 2 курс, 2025
+    </footer>
+
+</body>
+</html>
