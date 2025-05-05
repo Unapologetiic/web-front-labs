@@ -4,25 +4,70 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Кудеярова Яна Олеговна. Лабораторная 6</title>
+    <title>Кудеярова Яна Олеговна. Таблица умножений</title>
     <link rel="stylesheet" href="../main.css">
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
     <link rel="icon" href="../favicon-32x32.png">
     <link rel="icon" href="../favicon-16x16.png">
-    <script>
-        function showMutipleTable(){
-            let tbl = document.getElementById('mtable');
-            tbl.innerHTML = '<h1>Таблица умножения</h1>';
-            for(i = 1; i <= 10; i++) {
-                let s = `<div>${i} * 7 =${i*7}</div>`;
-                tbl.innerHTML += s;
+    <link rel="icon" href="favicon.ico">
+    <style>
+        main {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
         }
+
+        #controls {
+            margin-bottom: 20px;
+        }
+
+        label {
+            margin-right: 15px;
+        }
+
+        input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            margin-left: 5px;
+        }
+
+        button {
+            padding: 5px 10px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        #mtable div {
+            margin: 5px 0;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+    </style>
+
+    <script>
+        function showMutipleTable() {
+            let tbl = document.getElementById('mtable');
+            let multiplier = parseInt(document.getElementById('multiplier').value) || 7;
+            let start = parseInt(document.getElementById('start').value) || 1;
+            let end = parseInt(document.getElementById('end').value) || 10;
+
+            if (start > end) {
+                tbl.innerHTML = '<p style="color:red;">Ошибка: "Начать с" должно быть меньше или равно "Закончить на"</p>';
+                return;
+            }
+
+            tbl.innerHTML = `<h2>Таблица умножения на ${multiplier}</h2>`;
+
+            for (let i = start; i <= end; i++) {
+                let s = `<div>${i} × ${multiplier} = ${i * multiplier}</div>`;
+                tbl.innerHTML += s;
+            }
         }
     </script>
-    <style>
-
-    </style>
 </head>
+
 <body onload="showMutipleTable()">
     
     <header>
@@ -30,6 +75,13 @@
     </header>
 
     <main>
+        <div id="controls">
+            <label>Умножить на: <input type="number" id="multiplier" value="7"></label>
+            <label>Начать с: <input type="number" id="start" value="1"></label>
+            <label>Закончить на: <input type="number" id="end" value="10"></label>
+            <button onclick="showMutipleTable()">Таблица</button>
+        </div>
+        
         <div id="mtable"></div>  
     </main>
 
