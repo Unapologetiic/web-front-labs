@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кудеярова Яна Олеговна. Объекты</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <script src="books.js"></script>
+    <script>
+        function showBooks() {
+            const bookList = document.getElementById('bookList');
+            books.forEach(book => {
+                const bookDiv = document.createElement('div');
+                bookDiv.classList.add('book');
+                if (book.bestseller) {
+                    bookDiv.classList.add('bestseller');
+                }
+                if (!book.available) {
+                    bookDiv.classList.add('unavailable');
+                }
+
+                bookDiv.innerHTML = `
+                    <b>${book.author}</b><br>
+                    <i>${book.name}</i> — ${book.publicationYear}<br>
+                    <span class="price">Цена: ${book.price} руб.</span><br>
+                    ${!book.available ? '<span class="not-available-text">Книга временно недоступна</span>' : ''}
+                    ${book.bestseller ? '<span class="bestseller"> Книга является бестселлером </span>' : ''}
+                `;
+
+                bookList.appendChild(bookDiv);
+            });
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7e6cd;
+        }
+
+        main {
+            padding: 20px;
+            color:#b55163;
+            border:2px solid #e7ac98;
+        }
+
+        .book {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: #fff;
+            color: #b55163
+        }
+
+        .bestseller {
+            background-color: #fffbe6;
+        }
+
+        .unavailable {
+            opacity: 0.5;
+        }
+
+        .price {
+            color: #008000;
+            font-weight: bold;
+        }
+
+        .not-available-text {
+            color: red;
+            font-style: italic;
+        }
+        
+    </style>
+</head>
+<body onload="showBooks()">
+    
+    <header>
+        НГТУ, ФБ, Лабораторная работа 6
+    </header>
+
+    <main>
+         <h1>Список книг</h1>
+         <div id="bookList">
+
+         </div>
+    </main>
+
+    <footer>
+        &copy; Яна Кудеярова, ФБИ-31, 2 курс, 2025
+    </footer>
+
+</body>
+</html>
