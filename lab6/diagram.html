@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кудеярова Яна Олеговна. Диаграмма</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <script>
+        function showDiagram() {
+            let data = [36, 86, 55, 28, 92, 60, 41, 17, 9, 43];
+            let colors = ['green', 'mediumpurple', 'tan', 'deepskyblue', 'hotpink', 'chocolate', 'blueviolet', 'lightgreen', 'darkolivegreen', 'crimson'];
+            let bars = document.getElementsByClassName('bar');
+            const diagHeight = document.getElementById('diag').clientHeight;
+            const maxData = Math.max(...data);
+            const k = diagHeight / maxData * 0.9;
+
+            for (let i = 0; i < data.length; i++) {
+                bars[i].style.height = (k * data[i]) + 'px';
+                bars[i].style.backgroundColor = colors[i];
+                bars[i].textContent = data[i]; 
+            }
+        }
+    </script>
+    
+    <style>
+        #diag {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end; 
+            height: 400px;
+            width: 500px;
+            padding: 20px;
+            border: 2px solid palevioletred;
+            margin: 20px auto;
+            background-color: aliceblue;
+            gap: 10px;
+        }
+
+        .bar {
+            width: 40px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            border: 1px solid black;
+            border-radius: 5px 5px 0 0;
+            transition: height 0.5s ease;
+        }
+    </style>
+</head>
+<body onload="showDiagram()">
+    
+    <header>
+        НГТУ, ФБ, Лабораторная работа 6
+    </header>
+
+    <main>
+        <div id="diag">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; Яна Кудеярова, ФБИ-31, 2 курс, 2025
+    </footer>
+
+</body>
+</html> 
