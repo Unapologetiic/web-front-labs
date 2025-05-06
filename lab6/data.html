@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кудеярова Яна Олеговна. Дата-время</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <script>
+        function showDate() {
+            const locales = [
+                { code: 'ru-RU', name: 'Россия (ru-RU)' },
+                { code: 'en-US', name: 'США (en-US)' },
+                { code: 'de-DE', name: 'Германия (de-DE)' },
+                { code: 'ja-JP', name: 'Япония (ja-JP)' },
+                { code: 'ar-EG', name: 'Египет (ar-EG)' }
+            ];
+
+            const today = new Date();
+            const out = document.getElementById('current-date');
+
+            locales.forEach(locale => {
+                const dateStr = today.toLocaleString(locale.code);
+                const block = document.createElement('div');
+                block.className = 'date-block';
+
+                block.innerHTML = `
+                    <div class="locale-name">${locale.name}</div>
+                    <div class="date-time">${dateStr}</div>
+                `;
+                out.appendChild(block);
+            });
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #d1e1e6;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        main {
+            padding: 20px;
+            color: black;
+        }
+
+        .date-block {
+            background-color: #f5f1da;
+            border-left: 5px solid #6982b5;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .locale-name {
+            font-weight: bold;
+            font-size: 18px;
+            color: #806e83;
+        }
+
+        .date-time {
+            font-size: 16px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body onload = "showDate()">
+    
+    <header>
+        НГТУ, ФБ, Лабораторная работа 6
+    </header>
+
+    <main>
+        <h1>Текущая дата и время в разных странах</h1>
+         <div id="current-date"></div>
+    </main>
+
+    <footer>
+        &copy; Яна Кудеярова, ФБИ-31, 2 курс, 2025
+    </footer>
+
+</body>
+</html>
