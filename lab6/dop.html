@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Кудеярова Яна Олеговна. Дополнительное</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+        }
+
+        main {
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #2c3e50;
+        }
+
+        #chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 6px;
+            height: 350px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: fit-content;
+            max-width: 95%;
+            overflow-x: auto;
+        }
+
+        .day {
+            position: relative;
+            width: 22px;
+        }
+
+        .min, .max {
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            text-align: center;
+            font-size: 10px;
+            color: white;
+            border-radius: 4px 4px 0 0;
+            transition: background-color 0.3s, height 0.3s;
+        }
+
+        .min {
+            background: #2980b9;
+        }
+
+        .max {
+            background: #7fdbff;
+        }
+
+        .selected .max {
+            background: #e74c3c !important;
+        }
+
+        .selected .min {
+            background: orange;
+        }
+
+        div, input, button {
+            font-size: 16px;
+        }
+
+        input {
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 60px;
+            text-align: center;
+        }
+
+        button {
+            padding: 5px 12px;
+            border: none;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        header, footer {
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            background-color: #e0ecf7;
+            color: #2c3e50;
+        }
+    </style>
+
+    <script>
+        let data = [];
+        let selectedDay = null;
+
+        function randomTemp(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function createChart() {
+            const chart = document.getElementById('chart');
+            for (let i = 0; i < 30; i++) {
+                const min = randomTemp(5, 15);
+                const max = randomTemp(min + 1, min + 15);
+                data.push({ min, max });
+
+                const day = document.createElement('div');
+                day.className = 'day';
+                day.id = 'day' + i;
+
+                const maxDiv = document.createElement('div');
+                maxDiv.className = 'max';
+                maxDiv.style.height = max * 4 + 'px';
+                maxDiv.style.zIndex = 1;
+                maxDiv.textContent = max + '°';
+
+                const minDiv = document.createElement('div');
+                minDiv.className = 'min';
+                minDiv.style.height = min * 4 + 'px';
+                minDiv.style.bottom = max * 4 + 'px';
+                minDiv.textContent = min + '°';
+
+                day.appendChild(maxDiv);
+                day.appendChild(minDiv);
+                chart.appendChild(day);
+            }
+        }
+
+        function highlightDay() {
+            const input = document.getElementById('dayInput');
+            const num = parseInt(input.value);
+            if (isNaN(num) || num < 1 || num > 30) {
+                alert("Введите число от 1 до 30");
+                return;
+            }
+
+            if (selectedDay !== null) {
+                document.getElementById('day' + selectedDay).classList.remove('selected');
+            }
+
+            selectedDay = num - 1;
+            document.getElementById('day' + selectedDay).classList.add('selected');
+
+            const t = data[selectedDay];
+            document.getElementById('result').textContent = 
+            `День ${num}: минимальная ${t.min}°C, максимальная ${t.max}°C`;
+        }
+
+        window.onload = createChart;
+    </script>
+</head>
+<body>
+
+    <header>
+        НГТУ, ФБ, Лабораторная работа 6
+    </header>
+
+    <main>
+        <h2>Температура за 30 дней</h2>
+
+        <div id="chart"></div>
+
+        <div>
+            День: <input type="number" id="dayInput" min="1" max="30">
+            <button onclick="highlightDay()">Найти</button>
+        </div>
+
+        <div id="result"></div>
+    </main>
+
+
+    <footer>
+        &copy; Яна Кудеярова, ФБИ-31, 2 курс, 2025
+    </footer>
+
+</body>
+</html>
