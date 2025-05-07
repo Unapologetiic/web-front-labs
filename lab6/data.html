@@ -2,39 +2,11 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Кудеярова Яна Олеговна. Дата-время</title>
     <link rel="stylesheet" href="../main.css">
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
     <link rel="icon" href="../favicon-32x32.png">
     <link rel="icon" href="../favicon-16x16.png">
-    <script>
-        function showDate() {
-            const locales = [
-                { code: 'ru-RU', name: 'Россия (ru-RU)' },
-                { code: 'en-US', name: 'США (en-US)' },
-                { code: 'de-DE', name: 'Германия (de-DE)' },
-                { code: 'ja-JP', name: 'Япония (ja-JP)' },
-                { code: 'ar-EG', name: 'Египет (ar-EG)' }
-            ];
-
-            const today = new Date();
-            const out = document.getElementById('current-date');
-
-            locales.forEach(locale => {
-                const dateStr = today.toLocaleString(locale.code);
-                const block = document.createElement('div');
-                block.className = 'date-block';
-
-                block.innerHTML = `
-                    <div class="locale-name">${locale.name}</div>
-                    <div class="date-time">${dateStr}</div>
-                `;
-                out.appendChild(block);
-            });
-        }
-    </script>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -43,6 +15,11 @@
             padding: 0;
         }
 
+        header {
+            padding: 20px;
+            font-size: 20px;
+            transition: color 0.5s ease;
+        }
 
         main {
             padding: 20px;
@@ -68,22 +45,99 @@
             font-size: 16px;
             margin-top: 5px;
         }
+
+        button {
+            margin: 5px;
+            padding: 8px 16px;
+        }
     </style>
+    <script>
+        let colorInterval;
+        let dateInterval;
+
+        function showDate() {
+            const locales = [
+                { code: 'ru-RU', name: 'Россия (ru-RU)' },
+                { code: 'en-US', name: 'США (en-US)' },
+                { code: 'de-DE', name: 'Германия (de-DE)' },
+                { code: 'ja-JP', name: 'Япония (ja-JP)' },
+                { code: 'ar-EG', name: 'Египет (ar-EG)' }
+            ];
+
+            const today = new Date();
+            const out = document.getElementById('current-date');
+            out.innerHTML = ''; // очистка перед обновлением
+
+            locales.forEach(locale => {
+                const dateStr = today.toLocaleString(locale.code);
+                const block = document.createElement('div');
+                block.className = 'date-block';
+
+                block.innerHTML = `
+                    <div class="locale-name">${locale.name}</div>
+                    <div class="date-time">${dateStr}</div>
+                `;
+                out.appendChild(block);
+            });
+        }
+
+        function changeColors() {
+            const header = document.getElementsByTagName('header')[0];
+            const rgb = `rgb(${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)})`;
+            header.style.color = rgb;
+        }
+
+        function startChangeColors() {
+            changeColors();
+            colorInterval = setInterval(changeColors, 300); // 300 мс
+            document.getElementById('start-btn').disabled = true;
+            document.getElementById('stop-btn').disabled = false;
+        }
+
+        function stopChangeColors() {
+            clearInterval(colorInterval);
+            document.getElementById('start-btn').disabled = false;
+            document.getElementById('stop-btn').disabled = true;
+        }
+
+        function startDateUpdate() {
+            showDate();
+            dateInterval = setInterval(showDate, 1000);
+            document.getElementById('start-date-btn').disabled = true;
+            document.getElementById('stop-date-btn').disabled = false;
+        }
+
+        function stopDateUpdate() {
+            clearInterval(dateInterval);
+            document.getElementById('start-date-btn').disabled = false;
+            document.getElementById('stop-date-btn').disabled = true;
+        }
+    </script>
 </head>
-<body onload = "showDate()">
-    
-    <header>
-        НГТУ, ФБ, Лабораторная работа 6
-    </header>
+<body onload="showDate()">
 
-    <main>
-        <h1>Текущая дата и время в разных странах</h1>
-         <div id="current-date"></div>
-    </main>
+<header>
+    НГТУ, ФБ, Лабораторная работа 6
+</header>
 
-    <footer>
-        &copy; Яна Кудеярова, ФБИ-31, 2 курс, 2025
-    </footer>
+<main>
+    <h1>Текущая дата и время в разных странах</h1>
+    <div id="current-date"></div>
+
+    <div>
+        <button onclick="startChangeColors()" id="start-btn">Старт цвета</button>
+        <button onclick="stopChangeColors()" id="stop-btn" disabled>Стоп цвета</button>
+    </div>
+
+    <div>
+        <button onclick="startDateUpdate()" id="start-date-btn">Обновлять время</button>
+        <button onclick="stopDateUpdate()" id="stop-date-btn" disabled>Остановить обновление</button>
+    </div>
+</main>
+
+<footer>
+    &copy; Яна Кудеярова, ФБИ-31, 2 курс, 2025
+</footer>
 
 </body>
 </html>
