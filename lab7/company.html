@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кудеярова Яна Олеговна.Котировки акции компании "Нижнекамскнефтехим"</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <script src="company.js"></script>
+    <style>
+        #stockTable {
+            border-collapse: collapse;
+            width: 300px;
+            margin: 15px 0;
+        }
+        #stockTable th, #stockTable td {
+            border: 1px solid #ccc;
+            padding: 5px;
+            text-align: center;
+        }
+        .up { color: green; }
+        .down { color: red; }
+        button {
+            padding: 8px 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function showStocks() {
+            const table = document.createElement('table');
+            table.id = 'stockTable';
+            
+            
+            const header = table.insertRow();
+            header.insertCell().textContent = 'Дата';
+            header.insertCell().textContent = 'Цена,руб';
+            header.insertCell().textContent = 'Разница';
+            
+            let sum = 0;
+            let min = stockPrices[0];
+            let max = stockPrices[0];
+            
+            stockPrices.forEach((price, i) => {
+                const row = table.insertRow();
+                
+                
+                row.insertCell().textContent = stockDates[i];
+                
+                
+                row.insertCell().textContent = price.toFixed(2);
+                
+                // Разница
+                const diffCell = row.insertCell();
+                if (i > 0) {
+                    const diff = price - stockPrices[i-1];
+                    diffCell.textContent = diff.toFixed(2);
+                    diffCell.className = diff > 0 ? 'up' : diff < 0 ? 'down' : '';
+                } else {
+                    diffCell.textContent = '-';
+                }
+                
+                // Статистика
+                sum += price;
+                if (price < min) min = price;
+                if (price > max) max = price;
+            });
+            
+            
+            document.querySelector('main').appendChild(table);
+            
+            
+            const stats = document.createElement('div');
+            stats.innerHTML = `
+                <p>Среднее: ${(sum / stockPrices.length).toFixed(2)}</p>
+                <p>Максимум: ${max.toFixed(2)}</p>
+                <p>Минимум: ${min.toFixed(2)}</p>
+            `;
+            document.querySelector('main').appendChild(stats);
+            
+            
+            document.querySelector('button').remove();
+        }
+    </script>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 7
+    </header>
+
+    <main>
+        <button onclick="showStocks()">Курс акций НКНХ</button>
+    </main>
+
+    <footer>
+        &copy; Яна Кудеярова, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
