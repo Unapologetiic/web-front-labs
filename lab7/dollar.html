@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кудеярова Яна Олеговна. Лабораторная 7</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <script src="dollar-data.js"></script>
+    <script>
+        function showExchange(){
+            let table = document.getElementById('dollar-table');
+            for(let i = 0; i < exchange.length; i++) {
+                let tr = document.createElement('tr');
+                let td = document.createElement('td');
+                td.innerText = exchange[i];
+                tr.appendChild(td);
+                table.appendChild(tr);
+            } 
+
+            let sum = 0;
+            for(let i = 0; i < exchange.length; i++){
+                sum += exchange[i];
+            }
+            let average = sum / exchange.length;
+            average = average.toFixed(2);
+            
+            // Вывод среднего значения
+            document.getElementById('detail').innerText = `Средний курс: ${average} руб.`;
+            
+            // Скрытие кнопки после нажатия
+            document.querySelector('button').style.display = 'none';
+        }
+    </script>
+    <style>
+        button {
+            margin: 10px 0;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        #dollar-table {
+            border-collapse: collapse;
+            width: 100px;
+            margin: 10px 0;
+        }
+        
+        #dollar-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        
+        #detail {
+            margin: 10px 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        НГТУ, ФБ, Лабораторная работа 7
+    </header>
+
+    <main>
+         <button onclick="showExchange()">Курс доллара</button>
+         <table id="dollar-table"></table>
+         <div id="detail"></div>
+    </main>
+
+    <footer>
+        &copy; Яна Кудеярова, ФБИ-31, 2 курс, 2025
+    </footer>
+
+</body>
+</html>
