@@ -4,15 +4,56 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Белон. Информация</title>
+    <title>О компании</title>
+    <link rel="stylesheet" href="rgz.css">
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
     <link rel="icon" href="../favicon-32x32.png">
     <link rel="icon" href="../favicon-16x16.png">
+    <script src="menu.js"></script>
+    <script>
+        document.querySelector('.scroll-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+    <style>
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #044585;
+            color: white;
+            font-size: 24px;
+            text-align: center;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 50%;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        .scroll-to-top:hover {
+            background-color: #0666b3;
+        }
+    </style>
 </head>
 <body>
     
     <header>
+         <img src = "logo4.jpg" width="200" height="100">
+
+         <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+
         
+        <nav class="side-menu" id="sideMenu">
+            <a href="company.html" class="menu-item active">О компании</a>
+            <a href="video.html" class="menu-item ">Видео</a>
+            <a href="contact.html" class="menu-item">Контакты</a>
+            
+        </nav>
     </header>
 
     <main>
@@ -25,7 +66,7 @@
         </p>
         
         <p>
-            ОАО «Белон» создано в Новосибирске в мае 1991 года. 
+            <a href="http://www.belon.ru/">«Белон»</a> создано в Новосибирске в мае 1991 года. 
             Первые важнейшие задачи компании: реконструкция угледобывающих 
             и углеперерабатывающих предприятий Кузбасса, формирование новых 
             технологических цепочек, установление актуальных производственных 
@@ -55,6 +96,8 @@
             27,7 тыс. тонн металлопродукции. Открыт первый филиал «Белона» в городе 
             Ленинск-Кузнецкий.
         </p>
+
+          <img src = "gorod.jpg" width="500" height="300">
 
         <p>
             <b>1993-1994 год</b>
@@ -179,6 +222,8 @@
             модернизацию и повышение производственной 
             безопасности.
         </p>
+
+          <img src = "шахта.jpg" width="500" height="300">
 
         <p>
             <b>2006 - 2007 год</b>
@@ -401,10 +446,11 @@
             Цех сервиса и логистики в полном объеме обеспечивает потребность нашего предприятия 
             по транспорту и сервисным услугам.
         </p>
+        <a href="#" class="scroll-to-top" title="Наверх">↑</a>
     </main>
 
     <footer>
-        
+        &copy; Компания "БЕЛОН"
     </footer>
 
 </body>
