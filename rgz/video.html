@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="rgz.css">
+    <title>Видео о компании</title>
+    <script src="menu.js"></script>
+    <style>
+        .video-container {
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <img src = "logo4.jpg" width="200" height="100"> 
+     
+        <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+
+        
+        <nav class="side-menu" id="sideMenu">
+            <a href="company.html" class="menu-item">О компании</a>
+            <a href="video.html" class="menu-item active">Видео</a>
+            <a href="contact.html" class="menu-item">Контакты</a>
+            
+        </nav>
+    </header>
+
+    <main>
+        <h1>Видео о компании</h1>
+        <div class="video-container">
+            <iframe 
+                width="1200" 
+                height="600" 
+                src="https://rutube.ru/embed/6ebe7ce2950b6c70884ce032c2bbd31b/" 
+                frameborder="0" 
+                allowfullscreen>
+            </iframe>
+        </div>
+    </main>
+
+    <footer>
+        &copy; Компания "БЕЛОН"
+    </footer>
+</body>
+</html>
