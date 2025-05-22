@@ -1,96 +1,113 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Погода в Новосибирске</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      background: #f0f8ff;
-      color: #333;
-      text-align: center;
-    }
-    canvas {
-      max-width: 1000px;
-      margin: 20px auto;
-    }
-    .info {
-      font-size: 1.2em;
-      margin-top: 20px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кудеярова Яна Олеговна.Дополнительное</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+        background: #f0f8ff;
+        color: #333;
+        text-align: center;
+      }
+      canvas {
+        max-width: 1000px;
+        margin: 20px auto;
+      }
+      .info {
+        font-size: 1.2em;
+        margin-top: 20px;
+      }
+    </style>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const apiUrl = "https://api.open-meteo.com/v1/forecast?" +
-        "latitude=55.0415&longitude=82.9346&" +
-        "hourly=temperature_2m,relative_humidity_2m&" +
-        "current_weather=true&timezone=Asia%2FBangkok";
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const apiUrl = "https://api.open-meteo.com/v1/forecast?" +
+          "latitude=55.0415&longitude=82.9346&" +
+          "hourly=temperature_2m,relative_humidity_2m&" +
+          "current_weather=true&timezone=Asia%2FBangkok";
 
-      fetch(apiUrl)
-        .then(res => res.json())
-        .then(data => {
-          const time = data.hourly.time.slice(0, 24);
-          const temperature = data.hourly.temperature_2m.slice(0, 24);
-          const humidity = data.hourly.relative_humidity_2m.slice(0, 24);
+        fetch(apiUrl)
+          .then(res => res.json())
+          .then(data => {
+            const time = data.hourly.time.slice(0, 24);
+            const temperature = data.hourly.temperature_2m.slice(0, 24);
+            const humidity = data.hourly.relative_humidity_2m.slice(0, 24);
 
-          document.getElementById("current-temp").innerText = data.current_weather.temperature;
-          document.getElementById("current-humidity").innerText = data.hourly.relative_humidity_2m[0];
+            document.getElementById("current-temp").innerText = data.current_weather.temperature;
+            document.getElementById("current-humidity").innerText = data.hourly.relative_humidity_2m[0];
 
-          const ctx = document.getElementById('weatherChart').getContext('2d');
-          new Chart(ctx, {
-            type: 'bar',
-            data: {
-              labels: time.map(t => t.slice(11, 16)),
-              datasets: [
-                {
-                  label: 'Температура (°C)',
-                  data: temperature,
-                  backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                },
-                {
-                  label: 'Влажность (%)',
-                  data: humidity,
-                  backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                }
-              ]
-            },
-            options: {
-              responsive: true,
-              scales: {
-                y: {
-                  beginAtZero: true
-                }
+            const ctx = document.getElementById('weatherChart').getContext('2d');
+            new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: time.map(t => t.slice(11, 16)),
+                datasets: [
+                  {
+                    label: 'Температура (°C)',
+                    data: temperature,
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                  },
+                  {
+                    label: 'Влажность (%)',
+                    data: humidity,
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                  }
+                ]
               },
-              plugins: {
-                legend: {
-                  position: 'top',
+              options: {
+                responsive: true,
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  }
                 },
-                title: {
-                  display: true,
-                  text: 'Прогноз на ближайшие 24 часа'
+                plugins: {
+                  legend: {
+                    position: 'top',
+                  },
+                  title: {
+                    display: true,
+                    text: 'Прогноз на ближайшие 24 часа'
+                  }
                 }
               }
-            }
+            });
+          })
+          .catch(error => {
+            console.error("Ошибка при получении данных:", error);
           });
-        })
-        .catch(error => {
-          console.error("Ошибка при получении данных:", error);
-        });
-    });
-  </script>
+      });
+    </script>
 </head>
 <body>
 
-  <h1>Погода в Новосибирске: Температура и Влажность</h1>
-  <div class="info">
-    Текущая температура: <span id="current-temp">Загрузка...</span> °C<br>
-    Текущая влажность: <span id="current-humidity">Загрузка...</span> %
-  </div>
+  <header>
+     НГТУ, ФБ, Лабораторная работа 7
+  </header>
 
-  <canvas id="weatherChart" width="900" height="400"></canvas>
+  <main>
+    <h1>Погода в Новосибирске: Температура и Влажность</h1>
+    <div class="info">
+      Текущая температура: <span id="current-temp">Загрузка...</span> °C<br>
+      Текущая влажность: <span id="current-humidity">Загрузка...</span> %
+    </div>
+
+    <canvas id="weatherChart" width="900" height="400"></canvas>
+  </main>
+
+  <footer>
+     &copy; Яна Кудеярова, ФБИ-31, 2 курс, 2025
+  </footer>
+  
 
 </body>
 </html>
