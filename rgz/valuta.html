@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Курс валют: Калькулятор</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        header, footer { background: #f0f0f0; padding: 20px; text-align: center; }
+        main { padding: 20px; max-width: 900px; margin: auto; }
+        label, input { display: block; margin: 10px 0; }
+        canvas { max-width: 100%; margin-top: 30px; }
+        #info { margin-top: 10px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<header>
+    <!-- Заголовок или логотип -->
+</header>
+
+<main>
+    <h2>Калькулятор курса валют (USD)</h2>
+
+    <label>Сумма в рублях:
+        <input type="number" id="rubInput" placeholder="Введите сумму в рублях">
+    </label>
+
+    <label>Сумма в USD:
+        <input type="number" id="usdInput" placeholder="Введите сумму в USD">
+    </label>
+
+    <div id="rateDisplay"></div>
+
+    <canvas id="rateChart"></canvas>
+    <div id="info"></div>
+</main>
+
+<footer>
+    <!-- Подвал сайта -->
+</footer>
+
+<script>
+    let currentRate = 0;
+
+    async function fetchCurrentRate() {
+        const res = await fetch('https://www.cbr-xml-daily.ru/daily_json.js');
+        const data = await res.json();
+        currentRate = data.Valute.USD.Value;
+        document.getElementById('rateDisplay').textContent =
+            `Текущий курс USD: ${currentRate.toFixed(2)} руб.`;
+    }
+
+    function setupCalculator() {
+        const rubInput = document.getElementById('rubInput');
+        const usdInput = document.getElementById('usdInput');
+
+        rubInput.addEventListener('input', () => {
+            usdInput.value = (rubInput.value / currentRate).toFixed(2);
+        });
+
+        usdInput.addEventListener('input', () => {
+            rubInput.value = (usdInput.value * currentRate).toFixed(2);
+        });
+    }
+
+    function formatDateForRequest(date) {
+        const d = date.getDate().toString().padStart(2, '0');
+        const m = (date.getMonth() + 1).toString().padStart(2, '0');
+        const y = date.getFullYear();
+        return `${d}/${m}/${y}`;
+    }
+
+    async function fetchHistoricalRates() {
+        const today = new Date();
+        const pastDate = new Date();
+        pastDate.setDate(today.getDate() - 30);
+
+        const url = `https://www.cbr.ru/scripts/XML_dynamic.asp?date_req1=${formatDateForRequest(pastDate)}&date_req2=${formatDateForRequest(today)}&VAL_NM_RQ=R01235`;
+
+        const res = await fetch(url);
+        const text = await res.text();
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(text, "text/xml");
+
+        const records = Array.from(xml.querySelectorAll('Record'));
+        const labels = [];
+        const rates = [];
+
+        records.forEach(record => {
+            const date = record.getAttribute('Date');
+            const value = record.querySelector('Value').textContent.replace(',', '.');
+            labels.push(date);
+            rates.push(parseFloat(value));
+        });
+
+        return { labels, rates };
+    }
+
+    function renderChart(labels, rates) {
+        const ctx = document.getElementById('rateChart').getContext('2d');
+        const infoDiv = document.getElementById('info');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels,
+                datasets: [{
+                    label: 'Курс USD (руб.)',
+                    data: rates,
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'blue',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                onClick: (e, elements) => {
+                    if (elements.length > 0) {
+                        const index = elements[0].index;
+                        const date = labels[index];
+                        const rate = rates[index];
+                        infoDiv.textContent = `Дата: ${date}, курс USD: ${rate.toFixed(2)} руб.`;
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false
+                    }
+                }
+            }
+        });
+    }
+
+    (async function init() {
+        await fetchCurrentRate();
+        setupCalculator();
+        const { labels, rates } = await fetchHistoricalRates();
+        renderChart(labels, rates);
+    })();
+</script>
+
+</body>
+</html>
