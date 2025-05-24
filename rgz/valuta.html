@@ -2,25 +2,55 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="rgz.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <script src="menu.js"></script>
     <title>Курс валют: Калькулятор</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        header, footer { background: #f0f0f0; padding: 20px; text-align: center; }
-        main { padding: 20px; max-width: 900px; margin: auto; }
-        label, input { display: block; margin: 10px 0; }
-        canvas { max-width: 100%; margin-top: 30px; }
-        #info { margin-top: 10px; font-weight: bold; }
+    <style>  
+        main { 
+            padding: 20px; 
+            max-width: 900px; 
+            margin: auto; 
+        }
+        label, input { 
+            display: block; 
+            margin: 10px 0; 
+        }
+        canvas { 
+            max-width: 100%; 
+            margin-top: 30px; 
+        }
+        #info { 
+            margin-top: 10px; 
+            font-weight: bold; 
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <!-- Заголовок или логотип -->
+    <h1>Курс валют</h1>
+
+    <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+
+        
+        <nav class="side-menu" id="sideMenu">
+            <a href="company.html" class="menu-item">О компании</a>
+            <a href="video.html" class="menu-item">Видео</a>
+            <a href="contact.html" class="menu-item">Контакты</a>
+            <a href="news.html" class="menu-item">Новости</a>
+            <a href="valuta.html" class="menu-item active">Валюта</a>
+            
+        </nav>
 </header>
 
 <main>
-    <h2>Калькулятор курса валют (USD)</h2>
+    <h2>Калькулятор курса USD</h2>
 
     <label>Сумма в рублях:
         <input type="number" id="rubInput" placeholder="Введите сумму в рублях">
@@ -37,7 +67,7 @@
 </main>
 
 <footer>
-    <!-- Подвал сайта -->
+    &copy; 2025 Курс валют от ЦБ РФ
 </footer>
 
 <script>
@@ -64,24 +94,25 @@
         });
     }
 
-    function formatDateForRequest(date) {
-        const d = date.getDate().toString().padStart(2, '0');
-        const m = (date.getMonth() + 1).toString().padStart(2, '0');
-        const y = date.getFullYear();
-        return `${d}/${m}/${y}`;
+    function formatDate(date) {
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
     }
 
     async function fetchHistoricalRates() {
-        const today = new Date();
-        const pastDate = new Date();
-        pastDate.setDate(today.getDate() - 30);
+        const endDate = new Date();
+        const startDate = new Date();
+        startDate.setDate(endDate.getDate() - 30);
 
-        const url = `https://www.cbr.ru/scripts/XML_dynamic.asp?date_req1=${formatDateForRequest(pastDate)}&date_req2=${formatDateForRequest(today)}&VAL_NM_RQ=R01235`;
+        const rawUrl = `https://www.cbr.ru/scripts/XML_dynamic.asp?date_req1=${formatDate(startDate)}&date_req2=${formatDate(endDate)}&VAL_NM_RQ=R01235`;
+        const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(rawUrl)}`;
 
-        const res = await fetch(url);
-        const text = await res.text();
+        const res = await fetch(proxyUrl);
+        const xmlText = await res.text();
         const parser = new DOMParser();
-        const xml = parser.parseFromString(text, "text/xml");
+        const xml = parser.parseFromString(xmlText, "text/xml");
 
         const records = Array.from(xml.querySelectorAll('Record'));
         const labels = [];
