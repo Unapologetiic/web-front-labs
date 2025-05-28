@@ -40,6 +40,24 @@
             </ul>
             <hr>
 
+            <h2>Цветы</h2>
+            <table class="table table-danger">
+                <thead>
+                    <tr>
+                        <th>Назначение</th>
+                        <th>Редактировать</th>
+                    </tr>
+                </thead>
+                <tr v-for="(flower, id) in flowers">
+                    <td>
+                        {{ flower }}
+                    </td>
+                    <td>
+                        <button @clik="edit(id, flower)">?</button>
+                    </td>
+                </tr>
+            </table>
+
             <h2>Калькулятор</h2>
             <div class="row g-5">
                 <div class="col-auto">
