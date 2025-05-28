@@ -37,10 +37,13 @@
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-title">Цветы<i class="bi bi-flower1"></i></h2>
+                    <button @click="addFlower" class="btn btn-danger">Добавить цветок</button>
                     <ul class = 'list-group'>
                         <li v-for = "(flower, id) in flowers"  class="list-group-item list-group-item-danger">
                             <span v-if="flower === null">Загружается...</span>
-                             {{ flower }} <button @click="edit(id, flower)" class="btn btn-danger" v-if="flower !== null"><i class="bi bi-pencil-fill"></i></button>
+                             {{ flower }} 
+                             <button @click="edit(id, flower)" class="btn btn-danger ms-2" v-if="flower !== null"><i class="bi bi-pencil-fill"></i></button>
+                             <button @click="removeFlower(id)" class="btn btn-dark ms-2" v-if="flower !== null"><i class="bi bi-trash-fill"></i></button>
                         </li>
                     </ul>
                 </div>
@@ -48,11 +51,12 @@
             <hr>
 
             <h2>Цветы<i class="bi bi-flower1"></i></h2>
+            <button @click="addFlower" class="btn btn-danger">Добавить цветок</button>
             <table class="table table-danger">
                 <thead>
                     <tr>
                         <th>Назначение</th>
-                        <th>Редактировать</th>
+                        <th>Действия</th>
                     </tr>
                 </thead>
                 <tr v-for="(flower, id) in flowers">
@@ -61,8 +65,11 @@
                         <span v-else>{{ flower }}</span>
                     </td>
                     <td>
-                        <button @click="edit(id, flower)" class="btn btn-danger" v-if="flower !== null">
+                        <button @click="edit(id, flower)" class="btn btn-danger me-2" v-if="flower !== null">
                             <i class="bi bi-pencil-fill"></i>
+                        </button>
+                        <button @click="removeFlower(id)" class="btn btn-dark" v-if="flower !== null">
+                            <i class="bi bi-trash-fill"></i>
                         </button>
                         <div class="spinner-border" role="status" v-if="flower === null"></div>
                     </td>
@@ -126,13 +133,26 @@
                 },
                 edit (id, flower) {
                     let newName = prompt ('Введите имя цветка:', flower);
-                    this.flowers[id] = null;
-                    setTimeout(() => {
-                        this.flowers[id] = newName;
-                    }, 3000);
+                    if (newName !== null) {
+                        this.flowers[id] = null;
+                        setTimeout(() => {
+                            this.flowers[id] = newName;
+                        }, 3000);
+                    }
                 },
                 sum() {
                     this.result = this.a + this.b;
+                },
+                removeFlower(id) {
+                    if (confirm('Вы уверены, что хотите удалить этот цветок?')) {
+                        this.flowers.splice(id, 1);
+                    }
+                },
+                addFlower() {
+                    const newFlower = prompt('Введите название нового цветка:');
+                    if (newFlower && newFlower.trim() !== '') {
+                        this.flowers.push(newFlower.trim());
+                    }
                 }
             }
         }).mount('#app');
