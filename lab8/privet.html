@@ -70,7 +70,10 @@
                 },
                 edit (id, flower) {
                     let newName = prompt ('Введите имя цветка:', flower);
-                    this.flowers[id] = newName;
+                    this.flowers[id] = 'сохранение...';
+                    setTimeout(() => {
+                        this.flowers[id] = newName;
+                    }, 3000);
                 },
             }
         }).mount('#app');
